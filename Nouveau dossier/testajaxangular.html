@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+    <script src="angular-route.js"></script>
+</head>
+
+<body ng-app="myapp" >
+
+  <div ng-controller="MyController" >
+    <button ng-click="myData.doClick(item, $event)">Send AJAX Request</button>
+    <br/>
+    Data from server: {{myData.fromServer}}
+
+
+  <p>Looping with ng-repeat:</p>
+  <ul>
+    <li data-ng-repeat="x in myData.fromServer">
+      {{ x.username }}
+    <p>{{ x.url }}
+    </li>
+  </ul>
+</div>
+
+  <div ng-view>
+        </div>
+        <nav>
+            <a href="#/home" class="btn btn-primary">Page d'accueil</a>
+            <a href="#/contact" class="btn btn-success">Page de contact</a>
+        </nav>
+  </div>
+
+  <script>
+  
+var routeApp = angular.module('myapp', [
+    // Dépendances du "module"
+    'ngRoute'
+]);
+
+routeApp.config(['$routeProvider',
+    function($routeProvider) { 
+        
+        // Système de routage
+        $routeProvider
+        .when('/home', {
+            templateUrl: 'partials/home.html',
+            controller: 'homeCtrl'
+        })
+        .when('/contact', {
+            templateUrl: 'partials/contact.html',
+            controller: 'contactCtrl'
+        });
+    }
+]);
+  angular.module("myapp", [])
+        .controller("MyController", function($scope, $http) {
+            $scope.myData = {};
+            $scope.myData.doClick = function(item, event) {
+
+                var responsePromise = $http.get("http://localhost:8000/users/");
+		
+                responsePromise.success(function(data, status, headers, config) {
+		    console.log(data.results)
+                    $scope.myData.fromServer = data.results;
+                });
+                responsePromise.error(function(data, status, headers, config) {
+                    alert("AJAX failed!");
+                });
+            }
+
+
+        } );
+  </script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,29 @@
+<!doctype html>
+<html  ng-app="gemStore" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Example - example-checkbox-input-directive</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script src="angular.min.js"></script>
+        <script src="angular-route.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+
+
+
+    </head>
+    <body class="container" ng-controller="StoreController as store">
+        <div class="list-group-item">
+            <!--  Product Container  -->
+            <div class="list-group-item" ng-repeat="product in store.products">
+                <h3>
+                    {{product.name}}
+                    <em class="pull-right">{{product.price | currency}}</em>
+                </h3>
+                <!-- Image Gallery  -->
+                <div class="gallery">
+                    <img ng-src="{{product.images[0]}}"/>
+                </div>
+            </div>
+            </body>
+        </html>

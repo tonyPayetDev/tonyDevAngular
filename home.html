@@ -1,0 +1,28 @@
+<!-- partials/home.html -->
+
+<div class="container">
+<section class="jumbotron home">
+    <h2>Page d'accueil</h2>
+    <p>
+        {{ message }}
+    </p>
+
+ <div ng-controller="MyController" >
+    <button ng-click="myData.doClick(item, $event)">Send AJAX Request</button>
+    <br/>
+    Data from server: {{myData.fromServer}}
+
+
+  <p>Looping with ng-repeat:</p>
+  <ul>
+    <li data-ng-repeat="x in myData.fromServer"  ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}">
+      {{ x.username }}
+    <p>{{ x.url }}
+    </li>
+  </ul>
+ <div ng-controller="MyController2" >
+  
+
+</div>
+</section>
+</div>
